@@ -1,6 +1,5 @@
 import * as React from "react";
 import { View, Text, StatusBar } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
@@ -49,7 +48,6 @@ export const AppStack = () => {
     <Drawer.Navigator
       drawerContent={(props) => <CustomDrawerContent {...props} />}
     >
-      {/* <StatusBar barStyle="dark-content" /> */}
       <Drawer.Screen name="Home" component={Home} />
       <Drawer.Screen name="Workouts" component={Notifications} />
     </Drawer.Navigator>
