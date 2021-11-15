@@ -21,6 +21,10 @@ export default {
     ios: {
       supportsTablet: true
     },
+    android: {
+      package: "com.potts99.workout",
+      versionCode: 1
+    },
     extra: {
       apiKey: process.env.API_KEY,
       authDomain: process.env.AUTH_DOMAIN,

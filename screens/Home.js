@@ -71,43 +71,6 @@ export const Home = () => {
   );
 };
 
-// export default function Home() {
-//   const renderItem = ({ item }) => <Item title={item.title} type={item.type} />;
-//   const [active, setActive] = useState(0);
-
-//   const handleLogout = () => {
-//     signOut(auth).catch(error => console.log('Error logging out: ', error));
-//   };
-
-//   return (
-//     <View style={{ padding: 16, backgroundColor: "#fff" }}>
-//       <View>
-//         <TextInput style={styles.input} placeholder="Search for workout" />
-//       </View>
-
-//       <View>
-//         <View style={{ marginTop: 16, marginLeft: 16 }}>
-//           <Text style={{ fontSize: 20, fontWeight: "800", color: "grey" }}>
-//             Top Workouts 💪
-//           </Text>
-//           <Carousel
-//             ref={(c) => {
-//               _carousel = c;
-//             }}
-//             data={workouts}
-//             sliderWidth={400}
-//             layout={"stack"}
-//             itemWidth={500}
-//             renderItem={renderItem}
-//             onSnapToItem={(index) => setActive(index)}
-//             hasParallaxImages={true}
-//           />
-//         </View>
-//       </View>
-//     </View>
-//   );
-// }
-
 const styles = StyleSheet.create({
   input: {
     height: 40,

@@ -5,8 +5,6 @@ import {
   DrawerContentScrollView,
   DrawerItemList,
 } from "@react-navigation/drawer";
-import { createStackNavigator } from '@react-navigation/stack';
-
 
 import { Home } from "../screens";
 
@@ -27,21 +25,6 @@ function CustomDrawerContent(props) {
 }
 
 const Drawer = createDrawerNavigator();
-
-// export default function AppStack() {
-//   return (
-    // <Drawer.Navigator
-    //   drawerContent={(props) => <CustomDrawerContent {...props} />}
-    // >
-    //   <StatusBar barStyle="dark-content" />
-    //   <Drawer.Screen name="Home" component={HomeScreen} />
-    //   <Drawer.Screen name="Workouts" component={Notifications} />
-    // </Drawer.Navigator>
-//   );
-// }
-
-
-const Stack = createStackNavigator();
 
 export const AppStack = () => {
   return (

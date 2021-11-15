@@ -1,13 +1,13 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { onAuthStateChanged } from 'firebase/auth';
-import { StatusBar } from 'react-native';
+import React, { useState, useContext, useEffect } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { onAuthStateChanged } from "firebase/auth";
+import { StatusBar } from "react-native";
 
-import { AuthStack } from './AuthStack';
-import { AppStack } from './AppStack';
-import { AuthenticatedUserContext } from '../providers';
-import { LoadingIndicator } from '../components';
-import { auth } from '../config';
+import { AuthStack } from "./AuthStack";
+import { AppStack } from "./AppStack";
+import { AuthenticatedUserContext } from "../providers";
+import { LoadingIndicator } from "../components";
+import { auth } from "../config";
 
 export const RootNavigator = () => {
   const { user, setUser } = useContext(AuthenticatedUserContext);
@@ -17,7 +17,7 @@ export const RootNavigator = () => {
     // onAuthStateChanged returns an unsubscriber
     const unsubscribeAuthStateChanged = onAuthStateChanged(
       auth,
-      authenticatedUser => {
+      (authenticatedUser) => {
         authenticatedUser ? setUser(authenticatedUser) : setUser(null);
         setIsLoading(false);
       }
@@ -34,7 +34,11 @@ export const RootNavigator = () => {
   return (
     <NavigationContainer>
       <StatusBar barStyle="dark-content" />
-      {user ? <AppStack /> : <AuthStack />}
+      {/* {user ?
+      //  <AppStack /> 
+       :  */}
+       <AuthStack />
+       {/* } */}
     </NavigationContainer>
   );
 };
