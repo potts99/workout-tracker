@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Dimensions } from "react-native";
+import { StyleSheet, View, Dimensions, Image } from "react-native";
 import {
   Container,
   Fab,
@@ -7,11 +7,9 @@ import {
   HStack,
   Icon,
   VStack,
-  Divider,
   Box,
   Text,
-  Badge,
-  Button
+  Button,
 } from "native-base";
 import { AntDesign } from "@expo/vector-icons";
 
@@ -62,7 +60,7 @@ export const Home = () => {
           </HStack>
         </Container>
         <Container marginTop="4">
-          <Heading>Favourite workouts</Heading>
+          <Heading fontSize="16">Here are your Favourite workouts 💪</Heading>
           <VStack marginTop="2">
             {workouts.map((workout) => (
               <Box
@@ -70,19 +68,38 @@ export const Home = () => {
                 overflow="hidden"
                 borderColor="coolGray.200"
                 borderWidth="1"
-                minWidth="350"
+                minWidth={width - 50}
                 justifyContent="center"
                 marginTop="4"
               >
-
-                <HStack>
+                <Image
+                  source={require("../assets/gym-64.png")}
+                  fadeDuration={0}
+                  style={{ width: 50, height: 50, marginLeft: 4 }}
+                  position='absolute'
+                />
+                <HStack ml="12">
                   <Text fontSize="xl" p="4">
                     {workout.title}
                   </Text>
-                </HStack >
-                <HStack ml='4' pb='4'space='4' >
-                  <Button rounded='2xl' colorScheme="success" flexDirection='row' size="md">{workout.sets + ' sets'}</Button>
-                  <Button rounded='2xl' colorScheme="success" flexDirection='row' size="md">{workout.reps + ' reps'}</Button>
+                </HStack>
+                <HStack ml="16" pb="4" space="4">
+                  <Button
+                    rounded="2xl"
+                    colorScheme="success"
+                    flexDirection="row"
+                    size="md"
+                  >
+                    {workout.sets + " sets"}
+                  </Button>
+                  <Button
+                    rounded="2xl"
+                    colorScheme="success"
+                    flexDirection="row"
+                    size="md"
+                  >
+                    {workout.reps + " reps"}
+                  </Button>
                 </HStack>
               </Box>
             ))}

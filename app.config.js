@@ -18,6 +18,7 @@ export default {
       fallbackToCacheTimeout: 0
     },
     assetBundlePatterns: ['**/*'],
+    assets: ['./resources/fonts'],
     ios: {
       supportsTablet: true
     },
