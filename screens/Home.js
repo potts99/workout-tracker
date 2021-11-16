@@ -12,6 +12,7 @@ import {
   Button,
 } from "native-base";
 import { AntDesign } from "@expo/vector-icons";
+import Carousel from "react-native-snap-carousel";
 
 import { Images, Colors, auth } from "../config";
 
@@ -41,7 +42,55 @@ const workouts = [
   },
 ];
 
+function FavWorkouts({ item }, parallaxProps) {
+  return (
+    <Box
+      rounded="xl"
+      overflow="hidden"
+      borderColor="coolGray.200"
+      bg="white"
+      borderWidth="1"
+      minWidth={200}
+      justifyContent="center"
+      marginTop="4"
+    >
+      <Image
+        source={require("../assets/gym-64.png")}
+        fadeDuration={0}
+        style={{ width: 50, height: 50, marginLeft: 8 }}
+        position="absolute"
+      />
+      <HStack ml="12">
+        <Text fontSize="xl" p="4">
+          {item.title}
+        </Text>
+      </HStack>
+      <HStack ml="16" pb="4" space="4">
+        <Button
+          rounded="2xl"
+          colorScheme="success"
+          flexDirection="row"
+          size="md"
+        >
+          {item.sets + " sets"}
+        </Button>
+        <Button
+          rounded="2xl"
+          colorScheme="success"
+          flexDirection="row"
+          size="md"
+        >
+          {item.reps + " reps"}
+        </Button>
+      </HStack>
+    </Box>
+  );
+}
+
 export const Home = () => {
+  const [index, setIndex] = useState();
+  const isCarousel = React.useRef(null);
+
   return (
     <View>
       <Container padding="8">
@@ -62,47 +111,20 @@ export const Home = () => {
         <Container marginTop="4">
           <Heading fontSize="16">Here are your Favourite workouts 💪</Heading>
           <VStack marginTop="2">
-            {workouts.map((workout) => (
-              <Box
-                rounded="lg"
-                overflow="hidden"
-                borderColor="coolGray.200"
-                borderWidth="1"
-                minWidth={width - 50}
-                justifyContent="center"
-                marginTop="4"
-              >
-                <Image
-                  source={require("../assets/gym-64.png")}
-                  fadeDuration={0}
-                  style={{ width: 50, height: 50, marginLeft: 4 }}
-                  position='absolute'
-                />
-                <HStack ml="12">
-                  <Text fontSize="xl" p="4">
-                    {workout.title}
-                  </Text>
-                </HStack>
-                <HStack ml="16" pb="4" space="4">
-                  <Button
-                    rounded="2xl"
-                    colorScheme="success"
-                    flexDirection="row"
-                    size="md"
-                  >
-                    {workout.sets + " sets"}
-                  </Button>
-                  <Button
-                    rounded="2xl"
-                    colorScheme="success"
-                    flexDirection="row"
-                    size="md"
-                  >
-                    {workout.reps + " reps"}
-                  </Button>
-                </HStack>
-              </Box>
-            ))}
+            <Carousel
+              ref={isCarousel}
+              layout={"default"}
+              useScrollView={true}
+              sliderWidth={350}
+              itemWidth={350}
+              data={workouts}
+              renderItem={FavWorkouts}
+              onSnapToItem={(index) => setIndex(index)}
+              inactiveSlideShift={0}
+              containerCustomStyle={styles.slider}
+              contentContainerCustomStyle={styles.sliderContentContainer}
+              useScrollView={true}
+            />
           </VStack>
         </Container>
       </Container>
@@ -138,5 +160,12 @@ const styles = StyleSheet.create({
     margin: 5,
     height: 150,
     borderRadius: 24,
+  },
+  slider: {
+    overflow: "visible", // for custom animations
+    
+  },
+  sliderContentContainer: {
+    alignItems: 'baseline', // for custom animation
   },
 });
