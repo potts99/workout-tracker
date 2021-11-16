@@ -1,12 +1,16 @@
 import * as React from "react";
-import { View, Text, StatusBar } from "react-native";
+import { View, Text } from "react-native";
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
   DrawerItemList,
+  DrawerItem,
 } from "@react-navigation/drawer";
+import { signOut } from 'firebase/auth';
+
 
 import { Home } from "../screens";
+import { auth } from '../config';
 
 function Notifications() {
   return (
@@ -17,9 +21,18 @@ function Notifications() {
 }
 
 function CustomDrawerContent(props) {
+
   return (
     <DrawerContentScrollView {...props}>
       <DrawerItemList {...props} />
+      <DrawerItem
+        label="Sign Out"
+        onPress={() =>
+          signOut(auth).catch((error) =>
+            console.log("Error logging out: ", error)
+          )
+        }
+      />
     </DrawerContentScrollView>
   );
 }

@@ -34,11 +34,7 @@ export const RootNavigator = () => {
   return (
     <NavigationContainer>
       <StatusBar barStyle="dark-content" />
-      {/* {user ?
-      //  <AppStack /> 
-       :  */}
-       <AuthStack />
-       {/* } */}
+      {user ? <AppStack /> : <AuthStack />}
     </NavigationContainer>
   );
 };

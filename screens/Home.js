@@ -1,9 +1,21 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, TextInput, Dimensions, Button } from "react-native";
-import Carousel from "react-native-snap-carousel";
-import { signOut } from 'firebase/auth';
+import { StyleSheet, View, Dimensions } from "react-native";
+import {
+  Container,
+  Fab,
+  Heading,
+  HStack,
+  Icon,
+  VStack,
+  Divider,
+  Box,
+  Text,
+  Badge,
+  Button
+} from "native-base";
+import { AntDesign } from "@expo/vector-icons";
 
-import { auth } from '../config';
+import { Images, Colors, auth } from "../config";
 
 const { width } = Dimensions.get("window");
 
@@ -12,61 +24,71 @@ const workouts = [
     id: 1,
     title: "Monday Workout",
     type: "Full Body Workout",
+    sets: 5,
+    reps: 8,
   },
   {
     id: 2,
     title: "Leg Day",
     type: "Leg Workout",
+    sets: 5,
+    reps: 8,
   },
   {
     id: 3,
     title: "Back Day",
     type: "Back Workout",
+    sets: 5,
+    reps: 8,
   },
 ];
 
-const Item = ({ title, type }) => (
-  <View style={styles.view}>
-    <View style={{ padding: 16 }}>
-      <Text style={styles.title}>{title}</Text>
-      <Text style={{ marginTop: 8 }}>{type}</Text>
-    </View>
-  </View>
-);
-
 export const Home = () => {
-  const renderItem = ({ item }) => <Item title={item.title} type={item.type} />;
-  const [active, setActive] = useState(0);
-
-  const handleLogout = () => {
-    signOut(auth).catch(error => console.log('Error logging out: ', error));
-  };
-
   return (
-    <View style={{ padding: 16, backgroundColor: "#fff" }}>
-      <View>
-        <TextInput style={styles.input} placeholder="Search for workout" />
-      </View>
+    <View>
+      <Container padding="8">
+        <Container>
+          <HStack space="32">
+            <Heading fontSize="32">Good Afternoon Jack</Heading>
+            <Fab
+              position="absolute"
+              renderInPortal={false}
+              size="sm"
+              icon={
+                <Icon color="white" as={<AntDesign name="plus" />} size="sm" />
+              }
+              backgroundColor={Colors.green}
+            />
+          </HStack>
+        </Container>
+        <Container marginTop="4">
+          <Heading>Favourite workouts</Heading>
+          <VStack marginTop="2">
+            {workouts.map((workout) => (
+              <Box
+                rounded="lg"
+                overflow="hidden"
+                borderColor="coolGray.200"
+                borderWidth="1"
+                minWidth="350"
+                justifyContent="center"
+                marginTop="4"
+              >
 
-      <View>
-        <View style={{ marginTop: 16, marginLeft: 16 }}>
-          <Text style={{ fontSize: 20, fontWeight: "800", color: "grey" }}>
-            Top Workouts 💪
-          </Text>
-          <Carousel
-            ref={(c) => {
-              _carousel = c;
-            }}
-            data={workouts}
-            sliderWidth={400}
-            layout={"stack"}
-            itemWidth={500}
-            renderItem={renderItem}
-            onSnapToItem={(index) => setActive(index)}
-            hasParallaxImages={true}
-          />
-        </View>
-      </View>
+                <HStack>
+                  <Text fontSize="xl" p="4">
+                    {workout.title}
+                  </Text>
+                </HStack >
+                <HStack ml='4' pb='4'space='4' >
+                  <Button rounded='2xl' colorScheme="success" flexDirection='row' size="md">{workout.sets + ' sets'}</Button>
+                  <Button rounded='2xl' colorScheme="success" flexDirection='row' size="md">{workout.reps + ' reps'}</Button>
+                </HStack>
+              </Box>
+            ))}
+          </VStack>
+        </Container>
+      </Container>
     </View>
   );
 };
